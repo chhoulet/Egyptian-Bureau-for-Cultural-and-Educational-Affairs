@@ -1,0 +1,28 @@
+{% extends '::baseCentre.html.twig' %}
+
+	{% block title %}{% endblock %}
+
+
+		{% block body %}
+			<div class="container">
+				<div class="row">
+		            <div class="box" style="text-align:justify;">
+		                <div class="col-lg-12">
+		                    <hr>
+		                    <h2 class="intro-text text-center">Mission of the 
+		                        <strong>Cultural Center</strong>
+		                    </h2>
+		                    <hr>
+		                    {% if missions is not null %}
+			                    {% for mission in missions %}
+				                    <img class="img-responsive img-border" src="{{ asset('uploads/photos/' ~ mission.photo)}}" alt="">
+				                    <hr  class="visible-xs"><br>
+				                    	<p>{{ mission.main|raw}}</p>
+			                	{% endfor %}
+			                {% endif %}
+		                </div>
+		            </div>
+	        	</div>
+	        </div>
+
+		{% endblock %}

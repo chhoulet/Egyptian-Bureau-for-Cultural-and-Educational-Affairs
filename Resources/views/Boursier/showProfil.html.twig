@@ -1,0 +1,166 @@
+{% extends '::baseBoursier.html.twig' %}
+
+	{% block body %}
+		<div class="container">
+			
+
+			{% for message in app.session.flashbag.get('editboursier') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+							{{ message }}
+					</div> 
+				</div>
+			{% endfor %}
+			
+			<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            مستنداتي
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            {% if listDocumentsByBoursier is not null %}
+	                            <ul class="nav nav-tabs">
+	                            	{% for doc in listDocumentsByBoursier %}
+	                                	<li><a href="#{{doc.id}}" data-toggle="tab">{{doc.name}}</a></li>
+	                                {% endfor %}                                
+	                            </ul>
+
+	                            <!-- Tab panes -->
+	                            <div class="tab-content">
+	                            	{% for doc in listDocumentsByBoursier %}
+		                                <div class="tab-pane fade in active" id="{{doc.id}}">		                               
+		                                    <h4>{{doc.name}}</h4>
+		                                    <p>{{ doc.description|raw }}</p>
+		                                    <a href="{{ asset('uploads/documents/' ~ doc.file) }}" target="_blank" >عرض المستندات</a>         
+		                                </div>                                
+		                            {% endfor %}
+	                            </div>
+	                        {% endif %}
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+            </div>
+
+			<div class="row">
+				<div class="col-md-6">
+
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            لقاءات المبعوثين
+                        </div>
+                        <!-- .panel-heading -->
+                        {% for event in listEvents %}
+	                        <div class="panel-body">
+	                            <div class="panel-group" id="accordion">
+	                                <div class="panel panel-warning">
+	                                    <div class="panel-heading">
+	                                        <h4 class="panel-title">
+	                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{{ event.name|upper}}</a>
+	                                        </h4>
+	                                    </div>
+	                                    <div id="collapseOne" class="panel-collapse collapse in">
+	                                        <div class="panel-body">
+	                                            <p>التاريخ : {{ event.dateEvent|date('d-m-Y')}}</p>
+	                                            <p>اللقاء : {{ event.description|raw}}</p>
+	                                            <p>المكان : {{ event.place|capitalize}}</p>
+	                                        </div>
+	                                    </div>
+	                                </div>                                
+	                            </div>
+	                        </div>
+	                    {% endfor %}
+                        
+                    </div>
+                    <!-- /.panel -->
+                </div>                          
+
+                <div class="col-md-6">	                   		                    			            					            			              
+					{% if (affich == 1) %}
+
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            صفحتي الشخصية
+	                        </div>
+	                        <div class="panel-body" style="text-align: right;">
+ 	                            <p><strong>اسم العائلة :</strong> {{ boursier.name|upper }}</p><br>
+	                            <p><strong>الاسم :</strong> {{ boursier.firstname|capitalize}}</p><br>
+	                            <p><strong>العنوان :</strong> {{ boursier.adress|capitalize}}</p><br>
+	                            <p><strong>المدينة :</strong> {{ boursier.city|capitalize}}</p><br>
+	                            <p><strong>المدينة :</strong> {{ boursier.telfix}}</p><br>
+	                            <p><strong>المدينة :</strong> {{ boursier.telpor}}</p><br>
+	                            <p><strong>المدينة :</strong> {{ boursier.telegy}}</p><br>
+	                            <p><strong>الرمز البريدي :</strong> {{ boursier.postcode}}</p><br>
+	                            <p><strong>تاريخ الوصول لبلد البعثة :</strong> {{ boursier.arrivalDate|date('d-m-Y')}}</p><br>
+	                            <p><strong>تاريخ الولادة :</strong> {{ boursier.birthDate|date('d-m-Y')}}</p><br>
+	                            <p><strong>نطاق الدراسة والبحث :</strong> {{ boursier.domain|capitalize}}</p><br>
+	                            <p><strong>موضوع الدراسة أو البحث :</strong> {{ boursier.subject|capitalize}}</p><br>
+	                            <p><strong>جامعة أو هيئة الارتباط في مصر :</strong> {{ boursier.universityEgypt|capitalize}}</p><br>
+	                            <p><strong>جامعة أو هيئة الدراسة في بلدة البعثة :</strong> {{ boursier.universityFrench|capitalize}}</p><br>
+	                            <p style="overflow:auto;"><strong>تعليق :</strong></p> {{ boursier.comment|capitalize}}</p><br>
+	                        </div>
+	                        <div class="panel-footer text-center">	                              	                            
+	                            
+					        		<a href="{{ path('article_boursier_editProfil',{id:boursier.id}) }}">تعديل
+					        	
+	                        </div>
+	                    </div>	  	                                      			
+
+	                {% else %}		                
+		                	<div class="panel panel-info">
+		                        <div class="panel-heading">
+		                            صفحتي الشخصيّة
+		                        </div>
+		                        <div class="panel-body" style="text-align:center;">
+									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+									  	حفظ صفحتي الشخصيّة
+									</button>                           
+		                        </div>
+		                        <div class="panel-footer">
+		                            من فضلك قم بتسجيل التعديلات! 
+		                        </div>
+		                    </div>
+
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content" style="text-align:right;">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								        <h4 class="modal-title" id="myModalLabel">إتمام الصفحة الشخصيّة</h4>
+								      </div>
+								      <div class="modal-body">
+								       <p>{{form_start(form) }}</p>
+								       <p>{{form_row(form.name) }}</p>
+								       <p>{{form_row(form.firstname) }}</p>
+								       <p>{{form_row(form.adress) }}</p>
+								       <p>{{form_row(form.postcode) }}</p>
+								       <p>{{form_row(form.city) }}</p>
+								       <p>{{form_row(form.arrivalDate) }}
+								      	  {{form_row(form.birthDate) }}</p>
+								       <p>{{form_row(form.domain) }}</p>
+								       <p>{{form_row(form.subject) }}</p>
+								       <p>{{form_row(form.universityEgypt) }}</p>
+								       <p>{{form_row(form.universityFrench) }}</p>
+								       <p>{{form_row(form.comment) }}</p>
+								      </div>
+								      <div class="modal-footer">
+								      		<div class="col-md-12" style='margin-top:25px;text-align:center;'>
+								        		{{form_end(form)}}							        
+								        	</div>								        	
+								      </div>
+							    </div>
+							  </div>
+							</div>
+					{% endif %}
+
+		        </div>																	
+			</div> 
+		</div> 
+	{% endblock %}

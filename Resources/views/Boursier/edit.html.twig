@@ -1,0 +1,36 @@
+{% extends '::baseBoursier.html.twig' %}
+
+	{% block title %}<title>صفحة المبعوثين: تعديل الحساب</title>{% endblock %} 
+
+		{% block body %}
+
+			<div class="container" style="background-color:white;">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 style="text-align:center;">تعديل صفحتي</h3>
+					   <p>{{form_start(form) }}</p>
+					   <p>{{form_row(form.name) }}</p>
+					   <p>{{form_row(form.firstname) }}</p>
+					   <p>{{form_row(form.adress) }}</p>
+					   <p>{{form_row(form.postcode) }}</p>
+					   <p>{{form_row(form.city) }}</p>
+					   <p>{{form_row(form.telfix) }}</p>
+					   <p>{{form_row(form.telpor) }}</p>
+					   <p>{{form_row(form.telegy) }}</p>
+					   <p>{{form_row(form.arrivalDate) }}
+					  	  {{form_row(form.birthDate) }}</p>
+					   <p>{{form_row(form.domain) }}</p>
+					   <p>{{form_row(form.subject) }}</p>
+					   <p>{{form_row(form.universityEgypt) }}</p>
+					   <p>{{form_row(form.universityFrench) }}</p>
+					   <p>{{form_row(form.comment) }}</p>
+					  					  
+				  		<div style='margin-top:25px;text-align:center;margin-bottom:35px;'>
+				    		{{form_end(form)}}							        
+				    	</div>					  
+					</div> 
+				</div> 
+				<hr/>
+			</div>
+
+		{% endblock %}

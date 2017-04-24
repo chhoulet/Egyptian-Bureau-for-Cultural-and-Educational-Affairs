@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+    {% block title %}<title>Services from Cultural Center</title>{% endblock %}
+
+	{% block body %}
+
+		<div class="container">            
+
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">Services
+                            <strong>from Cultural Center</strong>
+                        </h2>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="box" style="text-align:justify;">
+                    <div class="col-md-12">
+                        {% if listServices is not null %}
+                            {% for listService in listServices %}       
+                                <hr>
+                                    <h2 class="intro-text text-center">{{ listService.title|capitalize }}<br><br>
+                                        <strong>
+                                            {% if (listService.author is not null) %}
+                                                {{ listService.author|upper }}
+                                            {% endif %}
+                                        </strong>                                                                                                     
+                                    </h2>
+                                <hr>
+                                
+                                {% if (listService.filename is not null) %}                    
+                                    <img style="height:380px;width:570px;margin-bottom:35px;" class="img-responsive img-border img-full" src="{{ asset('uploads/photos/' ~ listService.filename) }}" alt=""/><br>
+                                {% endif %}
+
+                                {% if (listService.photo is not null) %}                    
+                                    <img style="height:110px;width:170px;" class="img-responsive img-border img-left" src="{{ asset('uploads/photos/' ~ listService.photo) }}"/>
+                                {% endif %}
+                                      
+                                <hr class="visible-xs">
+                                <p style="overflow:auto;">{{ listService.main|raw }}</p> <br><br>      
+                                                                                              
+                            {% endfor %}                                                                      
+                        {% endif %}
+                    </div>
+                </div>
+            </div>          
+
+        <hr/><br><br>
+
+    {% endblock %}
+
+    

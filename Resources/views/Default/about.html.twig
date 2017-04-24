@@ -1,0 +1,141 @@
+{% extends '::base.html.twig' %}
+
+	{% block body %}
+
+		<div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">History of the 
+                        <strong>Bureau</strong>
+                    </h2>
+                    <hr>
+                </div>
+                    {% if ArticlesForHistoireBureauCulturel is not null %}
+                        {% for histoire in ArticlesForHistoireBureauCulturel %}
+                            <div class="col-md-6">
+                                <img class="img-responsive img-border-left" src="{{ asset('uploads/photos/' ~ histoire.photo) }}" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                    <p>{{ histoire.main|raw }}</p>    
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Missions of the 
+                        <strong>Bureau</strong>
+                    </h2>
+                    <hr>
+                </div>
+                    {% if ArticlesForMissionBureauCulturel is not null %}
+                        {% for mission in ArticlesForMissionBureauCulturel %}
+                            <div class="col-md-6">
+                                <img class="img-responsive img-border-left" src="{{ asset('uploads/photos/' ~ mission.photo) }}" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                    <p>{{ mission.main|raw }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Our
+                        <strong>Team</strong>
+                    </h2>
+                    <hr>
+                </div>
+                    {% if listCounseillors is not null and listCounseillors is not empty %}                       
+                        {% for conseillor in listCounseillors %}
+                            {% if conseillor.hierarchicLevel == 1 %}
+                               
+                                <div class="col-lg-12 col-md-6" style="text-align:center;margin-bottom:20px;">                    
+                                    <img  src="{{ asset('uploads/photos/' ~ conseillor.image) }}" alt="Photo non disponible" style="width:300px;height:240px;">       
+                                </div>
+                                
+                                <div style="text-align:center;margin-top:20px;">
+                                    <h3>{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}
+                                        <small>{{ conseillor.job|capitalize }}</small>                
+                                    </h3>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#{{conseillor.id}}">More</button>
+                                </div>
+                                        
+                                        <div class="modal fade" id="{{conseillor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title" id="myModalLabel">{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}</h4>
+                                                    </div>
+                                                    <div class="modal-body" style="overflow:auto;text-align:left;">
+                                                        {{conseillor.description|capitalize}}
+                                                        <hr/>
+                                                        <div style="overflow:auto;text-align:center;">
+                                                            Mail: <strong> {{conseillor.mail }}</strong><br>
+                                                            Téléphone: <strong> {{conseillor.phone }}</strong><br>
+                                                            Fax: <strong> {{conseillor.fax }}</strong><br>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->                        
+                                
+                            {% else %}
+                                <div class="col-sm-4 text-center">                    
+                                    <img class="img-responsive" style="margin-left:20px;margin-top:40px; width:300px;height:240px;" src="{{ asset('uploads/photos/' ~ conseillor.image) }}" alt="Photo non disponible">                    
+                                    <h3>{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}
+                                        <small>{{ conseillor.job|capitalize }}</small>                
+                                    </h3>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#{{conseillor.id}}">More</button>
+                                        
+                                        <div class="modal fade" id="{{conseillor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title" id="myModalLabel">{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}</h4>
+                                                    </div>
+                                                    <div class="modal-body" style="overflow:auto;text-align:left;">
+                                                        {{conseillor.description|raw}}
+                                                        <hr/>
+                                                        <div style="overflow:auto;text-align:center;">
+                                                            Mail: <strong> {{conseillor.mail }}</strong><br>
+                                                            Téléphone: <strong> {{conseillor.phone }}</strong><br>
+                                                            Fax: <strong> {{conseillor.fax }}</strong><br>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->                        
+                                </div>
+                            {% endif %}                        
+                        {% endfor %}
+                    {% endif %}
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center ;margin-top:35px;">
+                        <a href="{{ path('article_counseillor_unactive') }}" target="_blank"><button class="btn btn-info">See old members</button></a>
+                    </div> 
+                </div>
+               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+		
+	{% endblock %}

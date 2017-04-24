@@ -1,0 +1,70 @@
+{% extends '::base.html.twig' %}
+
+	{% block body %}
+
+			<div class="container" style="background-color:white;">
+		
+				{{ form_start(form) }}
+				{{ form_row(form.title) }}
+				{{ form_row(form.dateBeginning) }}
+
+					{% for event in form.events %}
+						<ul class="events" data-prototype="{{ form_widget(form.events.vars.prototype)|e('html_attr') }}">
+								<li>
+								{{ form_row(event.name) }}
+								</li> 
+								<li>
+								{{ form_row(event.dateEvent) }}
+								</li>
+								<li>
+								{{ form_row(event.description) }}
+								</li> 
+								<li id="lastLi">
+								{{ form_row(event.place) }}
+								</li>
+						</ul>
+					{% endfor %}
+						<button class="add_event_link" >Add an event</button>
+
+				{{ form_end(form) }}
+
+			</div>
+
+	{% endblock %}
+
+	{% block javascript %}
+		{{ parent() }}
+
+		<script>
+			var $collectionHolder;
+			var $addEventLink = $('button class="add_event_link">Add an event');
+			var $newLinkLi= $("#lastLi").append($addEventLink);
+
+			$(document).ready(function(){
+				$collectionHolder=$('ul.events');
+
+				$collectionHolder.append($newLinkLi);
+
+				$collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+				$addTagLink.on('click', function(e){
+					e.preventDefault();
+
+					addEventForm($collectionHolder, $newLinkLi);
+				});
+
+			});
+
+			function addEventForm($collectionHolder, $newLinkLi){
+				var prototype = $collectionHolder.data('prototype');
+				var index = $collectionHolder.data('index');
+				var newForm = prototype.replace(/__name__/g, index);
+
+				$collectionHolder.data('index', index + 1);
+				var $newFormLi = $("lastLi").append(newForm);
+
+				$newLinkLi.before($newFormLi);
+			}
+		</script>
+
+	{% endblock %}

@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+	{% block body %}
+
+		<div class="container">
+
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Old members</strong>
+                        </h2>
+                        <hr>
+                    </div>
+
+                    {% if listCounseillorsUnactive is not null %}
+                        {% for conseillor in listCounseillorsUnactive %}
+                            <div class="col-sm-4 text-center">                    
+                                <img class="img-responsive" style="margin-left:20px;margin-top:40px; width:300px;height:240px;" src="{{ asset('uploads/photos/' ~ conseillor.image) }}" alt="Photo non disponible">                    
+                                <h3>{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}
+                                    <small>{{ conseillor.job|capitalize }}</small>                
+                                </h3>
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#{{conseillor.id}}">See more</button>
+                                    
+                                    <div class="modal fade" id="{{conseillor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">{{ conseillor.name|upper ~' '~ conseillor.firstName|capitalize }}</h4>
+                                                </div>
+                                                <div class="modal-body" style="overflow:auto;text-align:left;">
+                                                    {{conseillor.description}}<br>
+                                                     Mail: <strong>{{conseillor.mail }}</strong><br>
+                                                     Phone: <strong>{{conseillor.phone }}</strong><br>
+                                                     Fax: <strong>{{conseillor.fax }}</strong><br>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->                        
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                   
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    <!-- /.container -->
+		
+	{% endblock %}

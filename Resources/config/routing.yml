@@ -1,0 +1,145 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Home:homepage }
+
+article_contact:
+    path:     /article/contact 
+    defaults: { _controller: ArticleBundle:Contact:contact}
+
+article_about:
+    path:    /article/about 
+    defaults: { _controller: ArticleBundle:About:about}
+
+article_books_list:
+    path:   /article/books/list 
+    defaults: { _controller: ArticleBundle:Book:list}
+
+article_partner_listPartnerPublic:
+    path:   /article/partner/listPartenaires/public 
+    defaults: { _controller: ArticleBundle:Partner:listPartnerPublic}
+
+article_program_create:
+    path:  /article/program/create 
+    defaults: { _controller: ArticleBundle:Program:create}
+
+article_counseillor_unactive:
+    path:  /article/counseillor/unactive
+    defaults: { _controller: ArticleBundle:Counseillor:unactive}
+
+article_service_list:
+    path:  /article/services/list 
+    defaults: { _controller: ArticleBundle:Service:list}
+
+article_article_list:
+    path:  /article/articles/list/{idLang}
+    defaults: { _controller: ArticleBundle:Article:list}
+
+# Gestion des Boursiers:
+article_boursier_accueil:
+    path:  /article/boursier/accueil 
+    defaults: { _controller: ArticleBundle:Boursier:accueil}
+
+article_boursier_showProfil:
+    path:  /article/boursier/showProfil/{id}
+    defaults: { _controller: ArticleBundle:Boursier:showProfil}
+    requirements:
+        id: "[0-9]+"
+
+article_boursier_editProfil:
+    path:  /article/boursier/editProfil/{id}
+    defaults: { _controller: ArticleBundle:Boursier:editProfil}
+    requirements:
+        id: "[0-9]+"
+
+
+# Gestion du centre culturel:
+article_centre_culturel_accueil:
+    path:  /article/centre_culturel/accueil 
+    defaults: { _controller: ArticleBundle:Centre:accueil}
+
+article_centre_culturel_contact:
+    path:  /article/centre_culturel/contact 
+    defaults: { _controller: ArticleBundle:Centre:contact}
+
+article_centre_culturel_histoire:
+    path:  /article/centre_culturel/histoire 
+    defaults: { _controller: ArticleBundle:Centre:histoire}
+
+article_centre_culturel_mission:
+    path:  /article/centre_culturel/mission 
+    defaults: { _controller: ArticleBundle:Centre:mission}
+
+article_centre_culturel_oldActivites:
+    path:  /article/centre_culturel/oldActivites 
+    defaults: { _controller: ArticleBundle:Centre:oldActivites}
+
+
+# GESTION DU SITE EN ARABE
+article_homepage_arabe:
+    path:     /version arabe
+    defaults: { _controller: ArticleBundle:Home:homepageArabe}
+
+article_about_arabe:
+    path:    /about/version arabe
+    defaults: { _controller: ArticleBundle:About:aboutArab}
+
+article_about_unActiveCounseillor_arabe:
+    path:    /about/unActiveCounseillor/version arabe
+    defaults: { _controller: ArticleBundle:Counseillor:unactiveArab}
+
+article_contact_arabe:
+    path:    /contact/arab 
+    defaults: { _controller: ArticleBundle:Contact:contactArab}
+
+article_book_arabe_list:
+    path:    /list/books/version arabe 
+    defaults: { _controller: ArticleBundle:Book:listArab}
+
+article_service_list_arab:
+    path:  /article/services/arabe/listArabe
+    defaults: { _controller: ArticleBundle:Service:listArabe}
+
+article_partner_listPartnerPublic_arab:
+    path:   /article/partner/listPartenaires/publicArab
+    defaults: { _controller: ArticleBundle:Partner:listPartnerPublicArab}
+
+
+# Gestion du centre culturel:
+article_centre_culturel_accueil_arabe:
+    path:  /article/centre_culturel/accueil/version arabe
+    defaults: { _controller: ArticleBundle:Centre:accueilArab}
+
+article_centre_culturel_contact_arabe:
+    path:  /article/centre_culturel/contact/version arabe
+    defaults: { _controller: ArticleBundle:Centre:contactArab}
+
+article_centre_culturel_histoire_arabe:
+    path:  /article/centre_culturel/histoire/version arabe
+    defaults: { _controller: ArticleBundle:Centre:histoireArab}
+
+article_centre_culturel_mission_arabe:
+    path:  /article/centre_culturel/mission/version arabe
+    defaults: { _controller: ArticleBundle:Centre:missionArab}
+
+article_centre_culturel_oldActivites_arabe:
+    path:  /article/centre_culturel/oldActivites/version arabe
+    defaults: { _controller: ArticleBundle:Centre:oldActivitesArab}
+
+# Gestion de l'ecole:
+article_school_presentation:
+    path:  /article/school/presentation 
+    defaults: { _controller: ArticleBundle:School:presentation}
+
+article_school_exams:
+    path:  /article/school/exams
+    defaults: { _controller: ArticleBundle:School:exams}
+
+article_school_activities:
+    path:  /article/school/activities
+    defaults: { _controller: ArticleBundle:School:activities}
+
+
+
+
+
+

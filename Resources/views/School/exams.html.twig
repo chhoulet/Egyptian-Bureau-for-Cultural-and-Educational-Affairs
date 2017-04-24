@@ -1,0 +1,39 @@
+{% extends '::baseSchool.html.twig' %}
+
+	{% block title %}Exams{% endblock %}
+
+	{% block body %} 
+		<div class="container">
+
+			{% if documentsScholars is not null and documentsScholars is not empty %}
+				{% for doc in documentsScholars %}
+					<div class="row">
+						<div class="box">
+							<div class="col-lg-12">
+			                    <div class="panel panel-info">
+			                        <div class="panel-heading">
+			                            {{ doc.name|upper }}
+			                        </div>
+			                        <div class="panel-body">
+			                            <p>{{ doc.description|raw }}</p>
+			                        </div>
+			                        <div class="panel-footer">
+			                            <p><a href="{{ asset('uploads/documents/' ~ doc.file) }}" target="_blank">See the PDF document</a></p>    
+			                        </div>
+			                    </div>
+			                </div>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="row">
+			    	<div class="box" style="text-align:justify;">
+			            <div class="col-lg-12">
+			            	<p>No documents yet !</p>
+			            </div>
+			        </div>
+			    </div>
+			{% endif %}
+
+		</div>
+	{% endblock %}

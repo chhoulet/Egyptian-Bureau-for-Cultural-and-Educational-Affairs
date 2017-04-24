@@ -1,0 +1,46 @@
+{% extends '::baseSchool.html.twig' %}
+
+	{% block title %}School presentation{% endblock %}
+
+	{% block body %}
+		<div class="container">
+			<div class="row">
+
+				{% if schoolActivities is not null and schoolActivities is not empty %}
+					{% for activity in schoolActivities %}						
+			            <div class="box" style="text-align:justify;">
+			                <div class="col-lg-12">
+			                    <hr>
+			                    <h2 class="intro-text text-center" id="activity">{{ activity.title|upper }}
+										   <strong>
+												{% if (activity.author is not null) %}
+			                       					by	{{ activity.author|capitalize }}<br>
+			                       				{% endif %}
+			                       			</strong>												
+			                       published on {{ activity.dateCreated|date('d-m-Y')}}                
+			                    </h2>
+			                    <hr>
+			                    	{% if (activity.filename is not null) %}                    
+			                    		<img style="height:380px;width:570px;margin-bottom:35px;" class="img-responsive img-border img-full" src="{{ asset('uploads/photos/' ~ activity.filename) }}" alt=""/><br>
+			                    	{% endif %}
+
+			                    	{% if (activity.photo is not null) %}                    
+			                    		<img style="height:110px;width:170px;" class="img-responsive img-border img-left" src="{{ asset('uploads/photos/' ~ activity.photo) }}"/>
+			                    	{% endif %}
+			                              
+				                    <hr class="visible-xs">
+				                    <p style="overflow:auto;">{{ activity.main|raw }}</p>			                    	
+			                </div>			              
+			            </div>
+			        {% endfor %}
+			    {% endif %}
+
+			    {% if test == true %}
+				    <div style="margin-top:25px;margin-bottom:25px;text-align:center;">
+				    	<a href="{{ path('article_school_activities') }}"><button class="btn btn-primary btn-lg">See the older activities</button></a>
+				    </div>
+			    {% endif %}
+			    
+			</div>
+		</div>
+	{% endblock %}

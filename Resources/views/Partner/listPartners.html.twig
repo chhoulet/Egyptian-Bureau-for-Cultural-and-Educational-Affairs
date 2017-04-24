@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+	{% block body %}
+		
+		<div class="container">
+
+			<div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Partnerships</strong>
+                        </h2>
+                        <hr>
+                    </div>
+                </div>	            
+	        </div>
+
+	        {% if listPartners is not null %}
+		        {% for partner in listPartners %}
+			        <div class="row">
+			        	<div class="box" style="text-align:justify;">        	
+							<div class="col-lg-12">
+								<hr/>
+				                    <h2 class="intro-text text-center">
+				                        <strong>{{ partner.name|upper }}</strong>
+				                    </h2>
+			                    <hr/>	
+			                    {% if partner.brochure is not null and partner.brochure is not empty %}		                    
+		                    		<img style="height:340px;" class="img-responsive img-full" src="{{ asset('uploads/photos/' ~ partner.brochure) }}" alt=""/>
+		                    		<p style="overflow:auto;">{{ partner.description|raw }}</p><br>                        
+		                        	<p><a href="http://{{ partner.lien }}" target="_blank">{{ partner.lien }}</a></p> 
+		                    	{% else %}
+		                        	<p style="overflow:auto;">{{ partner.description|raw }}</p><br>                        
+		                        	<p><a href="http://{{ partner.lien }}" target="_blank">{{ partner.lien }}</a></p>                 		
+		                    	{% endif %}
+			                </div>		           
+			            </div>
+			        </div>		       
+		        {% endfor %}
+		    {% endif %}
+
+	    </div>
+
+    {% endblock %}
+

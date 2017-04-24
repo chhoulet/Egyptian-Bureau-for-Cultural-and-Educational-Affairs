@@ -1,0 +1,7 @@
+services:
+    article_bundle_service_mail:
+        class: ArticleBundle\Services\mailService
+        arguments: ["@mailer"]
+    # article.example:
+    #     class: ArticleBundle\Example
+    #     arguments: ["@service_id", "plain_value", %parameter%]
