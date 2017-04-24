@@ -1,0 +1,15 @@
+{% extends '::baseUser.html.twig' %}
+
+	 {% block fos_user_content %}
+
+		<div class="container">
+	        <div class="row">
+	            <div class="col-md-8 col-md-offset-2" style="text-align:center;margin-top:50px;margin-bottom:50px;">
+	            	<p> {{ app.user.username|capitalize }} تمّ تعديل كلمة مرورك بنجاح!</p><br>
+	            	<p>{% include "FOSUserBundle:Profile:show_content.html.twig" %}</p>
+	            	<hr/>	            	
+	            </div> 
+	        </div> 
+	    </div>
+
+     {% endblock fos_user_content %}
