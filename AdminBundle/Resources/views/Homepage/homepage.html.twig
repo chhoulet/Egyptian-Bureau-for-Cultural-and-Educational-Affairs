@@ -1,0 +1,368 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+{% block body %}	
+
+	<div id="page-wrapper">
+	            <div class="row" style="background-color:#B4DEC9;">
+	                <div class="col-lg-12">
+	                    <h1 class="page-header">Dashboard</h1>
+	                </div>
+	                <!-- /.col-lg-12 -->
+	            </div><br><br>	           
+
+	            <!-- /.row -->
+	            {% if is_granted('ROLE_MANAGEMENT') %}
+	            <div class="row">
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-tasks fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ messagesConseiller }}</div>
+	                                    <div>{% if (messagesConseiller > 1) %}Messages{% else %}Message{% endif %} for Cultural Counseillor</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_message_list') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-tasks fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ messagesAttacheCulturel }}</div>
+	                                    <div>{% if (messagesAttacheCulturel > 1) %}Messages{% else %}Message{% endif %} for Cultural attaché</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_message_list') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-tasks fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ messagesAttacheAdministratif }}</div>
+	                                    <div>{% if (messagesAttacheAdministratif > 1) %}Messages{% else %}Message{% endif %} for Administrative Attaché</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_message_list') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-tasks fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ messagesSecretaireAdministratif }}</div>
+	                                    <div>{% if (messagesSecretaireAdministratif > 1) %}Messages{% else %}Message{% endif %} for Secretary</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_message_list') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>	                
+	            </div>
+
+	            <div class="row">
+	            	<div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-red">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-support fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ messagesSchoolSecretaire }}</div>
+	                                    <div>{% if (messagesSchoolSecretaire > 1) %}Messages{% else %}Message{% endif %} for School Secretary</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_message_list') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-primary">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-comments fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ studentsNumber }}</div>
+	                                    <div>{% if (studentsNumber > 1) %}Egyptians school{% else %}Egyptian school{% endif %}</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_school_listAndCreate',{origin:1,id:0}) }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">List</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>
+
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="panel panel-yellow">
+	                        <div class="panel-heading">
+	                            <div class="row">
+	                                <div class="col-xs-3">
+	                                    <i class="fa fa-shopping-cart fa-5x"></i>
+	                                </div>
+	                                <div class="col-xs-9 text-right">
+	                                    <div class="huge">{{ mailsNumber }}</div>
+	                                    <div>{% if (mailsNumber > 1) %}Newsletter Subscribers{% else %}Newsletter Subscriber{% endif %}</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <a href="{{ path('admin_newsletter_listAbonnes') }}">
+	                            <div class="panel-footer">
+	                                <span class="pull-left">See list</span>
+	                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                                <div class="clearfix"></div>
+	                            </div>
+	                        </a>
+	                    </div>
+	                </div>	                         	                      	         
+		    	            
+		            <div class="col-lg-3 col-md-6">
+		                    <div class="panel panel-success">
+		                        <div class="panel-heading">
+		                            <div class="row">
+		                                <div class="col-xs-3">
+		                                    <i class="fa fa-support fa-5x"></i>
+		                                </div>
+		                                <div class="col-xs-9 text-right">
+		                                    <div class="huge">{{ boursiersNumber }}</div>
+		                                    <div>{% if (boursiersNumber > 1) %}Scholars members{% else %}Scholar member{% endif %}</div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <a href="{{ path('admin_management_boursiers') }}">
+		                            <div class="panel-footer">
+		                                <span class="pull-left">List</span>
+		                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+		                                <div class="clearfix"></div>
+		                            </div>
+		                        </a>
+		                    </div>
+		                </div>
+		            </div>
+		        </row>
+		        {% endif %}
+		
+		<div class="container">
+
+			{% for message in app.session.flashbag.get('userAd') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+						{{ message }}
+					</div> 
+				</div>
+			{% endfor %}
+
+			{% for messag in app.session.flashbag.get('userRights') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+						{{ messag }}
+					</div> 
+				</div>
+			{% endfor %}			
+
+			{% for mess in app.session.flashbag.get('counseillor') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+						{{ mess }}
+					</div> 
+				</div>
+			{% endfor %}
+
+			{% for miris in app.session.flashbag.get('succes') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+						{{ miris }}
+					</div> 
+				</div>
+			{% endfor %}
+
+			{% for miri in app.session.flashbag.get('editCounseillor') %}
+				<div class="row">
+					<div class="col-md-12" id="flash">
+						{{ miri }}
+					</div> 
+				</div>
+			{% endfor %}			
+
+			{% if is_granted('ROLE_EDITOR') %}
+			<div class="row">
+            
+		        <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <strong>Management of the Cultural Bureau</strong>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="#missions-pills" data-toggle="tab">Missions</a>
+                                </li>
+                                <li><a href="#histoire-pills" data-toggle="tab">History</a>
+                                </li>
+                                <li><a href="#articles-pills" data-toggle="tab">Articles</a>
+                                </li>
+                                <li><a href="#services-pills" data-toggle="tab">Services</a>
+                                </li>
+                                <li><a href="#school-pills" data-toggle="tab">School activities</a>
+                                </li>
+                                <li><a href="#scholar-pills" data-toggle="tab">Scholar texts</a>
+                                </li>                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="missions-pills">
+                                    <h4>Missions</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:4}) }}"><button class="btn btn-info">Add a mission</button></a>
+                                    	{% if ArticlesForMissionBureauCulturel is not null %}                                  	
+		                                    {% for missionBureau  in  ArticlesForMissionBureauCulturel %}
+		                                    	<p style="overflow: auto;">{{ missionBureau.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:missionBureau.id}) }}" onclick="return(confirm('Are you sure to want to delete this text ?'))"><button class="btn btn-warning">Delete this text</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:missionBureau.id, idOrigin:4}) }}"><button class="btn btn-info">Edit this text</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>
+                                <div class="tab-pane fade" id="histoire-pills">
+                                    <h4>Histoire</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:5}) }}"><button class="btn btn-info">Complete the history</button></a>
+                                    	{% if ArticlesForHistoireBureauCulturel is not null %}
+		                                    {% for histoireBureau in ArticlesForHistoireBureauCulturel %}
+		                                    	<p style="overflow: auto;">{{ histoireBureau.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:histoireBureau.id}) }}" onclick="return(confirm('Are you sure to want to delete this text ?'))"><button class="btn btn-danger">Delete this text</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:histoireBureau.id, idOrigin:5}) }}"><button class="btn btn-info">Edit this text</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>
+                                <div class="tab-pane fade" id="articles-pills">
+                                    <h4>Articles</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:6}) }}"><button class="btn btn-info">Create an article</button></a>
+                                    	{% if articlesHomepage is not null %}
+		                                    {% for article in articlesHomepage %}
+		                                    	<p>{{ article.title|upper }}</p>
+		                                    	<p>{{ article.author|capitalize  }}</p>
+		                                    	<p>{{ article.dateCreated| date('d-m-Y') }}</p>
+		                                    	<p style="overflow: auto;">{{ article.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:article.id}) }}" onclick="return(confirm('Are you sure to want to delete this article ?'))"><button class="btn btn-danger">Delete this article</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:article.id, idOrigin:6}) }}"><button class="btn btn-info">Edit this  article</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>
+                                <div class="tab-pane fade" id="services-pills">
+                                    <h4>Services</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:7}) }}"><button class="btn btn-info">Create a service</button></a>
+                                    	{% if ArticlesForServicesBureauCulturel is not null %}
+		                                    {% for service in ArticlesForServicesBureauCulturel %}
+		                                    	<p>{{ service.title|upper }}</p>
+		                                    	<p>{{ service.author|capitalize  }}</p>
+		                                    	<p>{{ service.dateCreated| date('d-m-Y') }}</p>
+		                                    	<p style="overflow: auto;">{{ service.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:service.id}) }}" onclick="return(confirm('Are you sure to want to delete this service ?'))"><button class="btn btn-danger">Delete this service</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:service.id, idOrigin:7}) }}"><button class="btn btn-info">Edit this service</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>
+                                <div class="tab-pane fade" id="school-pills">
+                                    <h4>School activities</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:8}) }}"><button class="btn btn-info">Create a school activity</button></a>
+                                    	{% if ArticlesForSchoolActivities is not null %}
+		                                    {% for school in ArticlesForSchoolActivities %}
+		                                    	<p>{{ school.title|upper }}</p>
+		                                    	<p>{{ school.author|capitalize  }}</p>
+		                                    	<p>{{ school.dateCreated| date('d-m-Y') }}</p>
+		                                    	<p style="overflow: auto;">{{ school.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:school.id}) }}" onclick="return(confirm('Are you sure to want to delete this school activity ?'))"><button class="btn btn-danger">Delete this school activity</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:school.id, idOrigin:8}) }}"><button class="btn btn-info">Edit this school activity</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>
+                                <div class="tab-pane fade" id="scholar-pills">
+                                    <h4>Scholar texts</h4>
+                                    	<a href="{{ path('admin_article_create',{idOrigin:9}) }}"><button class="btn btn-info">Create a scholar text</button></a>
+                                    	{% if ArticlesForScholarTexts is not null %}
+		                                    {% for school in ArticlesForScholarTexts %}
+		                                    	<p>{{ school.title|upper }}</p>
+		                                    	<p>{{ school.author|capitalize  }}</p>
+		                                    	<p>{{ school.dateCreated| date('d-m-Y') }}</p>
+		                                    	<p style="overflow: auto;">{{ school.main|raw }}</p>
+		                                    	<a href="{{ path('admin_article_delete',{id:school.id}) }}" onclick="return(confirm('Are you sure to want to delete this school activity ?'))"><button class="btn btn-danger">Delete this scholar text</button></a>
+		                                    	<a href="{{ path('admin_article_editArticle',{id:school.id, idOrigin:9}) }}"><button class="btn btn-info">Edit this scholar text</button></a>
+		                                    {% endfor %}
+		                                {% endif %}
+                                </div>                                
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            {% endif %}
+            <hr/>
+		</div>
+	</div>
+
+
+{% endblock %}
+

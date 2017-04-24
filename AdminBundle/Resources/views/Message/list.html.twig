@@ -1,0 +1,104 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+	{% block body %}
+			
+        <div id="page-wrapper">
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Messages Received</h1>
+                </div>
+            </div>
+                <!-- /.col-lg-12 -->
+
+                {% for message in app.session.flashBag.get('deleteMess') %}
+                    <div id="flash">
+            		   {{ message }}
+                    </div>
+            	{% endfor %}
+
+                {% for messag in app.session.flashBag.get('sendMess') %}
+                    <div id="flash">
+                       {{ messag }}
+                    </div>
+                {% endfor %}                
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                        <p>Messages unread : {{ messageUnRead }}</p>
+                       
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Message</th>
+                                            <th>Mail</th>
+                                            <th>Received the</th>
+                                            <th>Recipient</th>
+                                            <th>State</th>
+                                            <th>Answer</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if messages is not null %}
+                                        	{% for message in messages %}
+        	                                    <tr class="odd gradeX">
+        	                                        <td>{{ message.title|upper}}</td>
+                                                    <td>{{ message.name|capitalize}}</td>
+        	                                        <td>{{ message.message|capitalize}}</td>
+                                                    <td class="center">{{ message.mail }}</td>
+                                                    <td class="center">{{ message.dateCreated|date('d-m-Y')}}</td>
+                                                    <td>
+                                                        {% if (message.receiver == 1) %}
+                                                            <strong>Cultural attaché</strong>                                                    
+                                                        {% elseif (message.receiver == 2)  %}
+                                                            <strong>Cultural and scientific Attaché</strong>                                                   
+                                                        {% elseif (message.receiver == 3)  %}
+                                                            <strong>Administrative Attaché</strong>
+                                                        {% elseif (message.receiver == 4)  %}
+                                                            <strong>Administrative Secretary</strong>
+                                                        {% elseif (message.receiver == 5)  %}
+                                                            <strong>School Secretary</strong>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if(message.readMessage == 0) %}
+                                                            <p style="color:red"><strong>Message unread !</strong></p>                                                    
+                                                        {% else %}
+                                                            <p style="color:green"><strong>Message read !</strong></p>                                               
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if(message.answeredMessage == 0) %}
+                                                            <p style="color:red"><strong>No answer !</strong></p>                                                    
+                                                        {% else %}
+                                                            <p style="color:green"><strong>Answer sended !</strong></p>                                               
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ path('admin_message_delete',{'id':message.id}) }}"><button class="btn btn-success" style="margin-bottom:10px;">Delete</button></a>
+                                                        <a href="{{ path('admin_message_read',{'id':message.id}) }}"><button class="btn btn-warning" style="margin-bottom:10px;">Mark message read</button></a>
+                                                        <a href="{{ path('admin_message_answerTo',{'id':message.id}) }}"><button type="button" class="btn btn-info">
+                                                          Answer / See the answers 
+                                                        </button></a>
+                                                    </td>                                           
+                                                </tr>
+        	                                {% endfor %}
+                                        {% endif %}                              
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                   
+                </div>
+            </div>
+        </div>       
+       
+
+    {% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+    {% block title %}<title>
+        {% if affich == 1 %}
+            {% if (origin == 1 ) %}
+                Add a mission for the Cultural Bureau
+            {% elseif (origin == 2 ) %}
+                Tell the story of the Cultural Bureau                       
+            {% elseif (origin == 4 ) %}
+                Add a mission for the Cultural Office
+            {% elseif (origin == 5 ) %}
+                Tell the story of the Cultural Office                        
+            {% elseif (origin == 7 ) %}
+                Create a service
+            {% elseif (origin == 8 ) %}
+                Create a school activity
+            {% elseif (origin == 9 ) %}
+                Create a school activity
+            {% endif %}
+        {% else %}
+            {% if (origin == 1 ) %}
+                Edit a mission for the Cultural Bureau
+            {% elseif (origin == 2 ) %}
+                Edit  the story of the Cultural Bureau                       
+            {% elseif (origin == 4 ) %}
+                Edit a mission for the Cultural Office
+            {% elseif (origin == 5 ) %}
+                Edit the story of the Cultural Office 
+            {% elseif (origin == 7 ) %}
+                Edit a Service
+            {% elseif (origin == 8 ) %}
+                Create a school activity
+            {% elseif (origin == 9 ) %}
+                Create a scholar text                       
+            {% endif %}
+        {% endif %}
+    </title>{% endblock %}
+
+	{% block body %}
+		
+		<div id="page-wrapper">
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    <h2 class="page-header">
+                        {% if affich == 1 %}
+                            {% if (origin == 1 ) %}
+                                Add a mission for the Cultural Bureau
+                            {% elseif (origin == 2 ) %}
+                                Tell the story of the Cultural Bureau                       
+                            {% elseif (origin == 4 ) %}
+                                Add a mission for the Cultural Office
+                            {% elseif (origin == 5 ) %}
+                                Tell the story of the Cultural Office                        
+                            {% elseif (origin == 7 ) %}
+                                Create a service
+                            {% elseif (origin == 8 ) %}
+                                Create a school activity
+                            {% elseif (origin == 9 ) %}
+                                Create a scholar text 
+                            {% endif %}
+                        {% else %}
+                            {% if (origin == 1 ) %}
+                                Edit a mission for the Cultural Bureau
+                            {% elseif (origin == 2 ) %}
+                                Edit  the story of the Cultural Bureau                       
+                            {% elseif (origin == 4 ) %}
+                                Edit a mission for the Cultural Office
+                            {% elseif (origin == 5 ) %}
+                                Edit the story of the Cultural Office 
+                            {% elseif (origin == 7 ) %}
+                                Edit a Service
+                            {% elseif (origin == 8 ) %}
+                                Edit a school activity 
+                            {% elseif (origin == 9 ) %}
+                                Create a scholar text                       
+                            {% endif %}
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+                              
+                
+            <div class="container" style="margin-top:45px;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {{ tinymce_init() }}
+                            {{form_start(form)}}
+                                {{form_row(form.title)}}
+                                {{form_row(form.titleArab)}}
+                                {{form_row(form.author)}}
+                                {{form_row(form.main)}}                             
+                                {{form_row(form.mainArab)}}                             
+                                {{form_row(form.photo)}}                             
+                                {{form_row(form.filename)}}                             
+                            <div style="text-align:center;margin-top:45px;">
+                                {{form_end(form)}}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+	{% endblock %}

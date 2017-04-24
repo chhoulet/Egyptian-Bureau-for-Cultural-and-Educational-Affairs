@@ -1,0 +1,88 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+	{% block title %}<title>{% if (affich == 1) %}Add{% else %}Update{% endif %} a school year</title>{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    {% if (affich == 1) %}
+                        <h2 class="page-header">Add a school year & fees : {{ yearForChoice }}</h2>
+                    {% else %}
+                        <h2 class="page-header">Update a school year & fees</h2>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% for messa in app.session.flashBag.get('yearSchool') %}
+                <div class="row">
+                    <div class="col-md-12" id="flash">
+                        {{ messa }}
+                    </div> 
+                </div>
+            {% endfor %}
+                              
+                
+            <div class="row">
+                <div class="col-lg-12" style="margin-top:35px;">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            {% if (affich == 1) %}
+                                <p style="font-weight: bold;">Create a school year</p>
+                            {% else %}
+                                <p style="font-weight: bold;">Edit a school year</p>
+                            {% endif %}                             
+                        </div>
+                        <div class="panel-body" style="text-align:center;">
+                            {{ form_start(formAmount) }}                           
+                                <div class="col-md-3">{{ form_row(formAmount.amountToBePayed) }}</div>
+                                <div class="col-md-3">{{ form_row(formAmount.examFees) }}</div>
+                                <div class="col-md-3">{{ form_row(formAmount.scholarYear) }}</div>
+                                <div class="col-md-3">{{ form_row(formAmount.civilYear) }}</div>
+                                <div class="col-md-12 text-center" style="margin-top:25px;">{{ form_row(formAmount.Valid) }}</div>                       
+                            {{ form_end(formAmount)}}
+                        </div>
+                        <div class="panel-footer">                            
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        
+
+             <div class="row">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <figcaption><h3 style="font-weight: bold; font-size: 22px;border:1 solid black; border-radius:45px;background-color: #67db3d;text-align:center;">List years & amounts school : {{ yearForChoice }}</h3></figcaption>
+                            <thead>
+                                <tr>
+                                    <th>Year of study</th>
+                                    <th>Scholar fees</th>
+                                    <th>Exam fees</th>                                   
+                                    <th>Actions</th>                                                             
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if amounts is not null %}
+                                    {% for amount in amounts %}
+                                       <tr class="odd gradeX">                               
+                                            <td>{{ amount.scholarYear}}</td>                                           
+                                            <td>{{ amount.amountToBePayed}}</td>                                           
+                                            <td>{{ amount.examFees }}</td>                                                                                 
+                                            <td>
+                                                <p><a href="{{ path('admin_amount_create',{origin:2, idAmount:amount.id}) }}" title="Update this school year"><i class="fa fa-pencil">  Update</i></a><br></p>
+                                                <p><a href="{{ path('admin_amount_delete',{idAmount:amount.id}) }}" title="Delete this school year" onclick="return(confirm('Are you sure you want to delete this school year ?'))"><i class="fa fa-times">  Delete</i></a></p>
+                                            </td>                                            
+                                        </tr> 
+                                    {% endfor %}
+                                {% endif %}                             
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>       
+		
+    {% endblock %}

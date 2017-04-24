@@ -1,0 +1,170 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+	{% block title %}<title>Newsletters management</title>{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+            
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Newsletters management</h2>
+                </div>
+            </div><br>
+
+            {% for mes in app.session.flashBag.get('newsletter') %}
+                <div class="row">
+                    <div class="col-md-12" id="flash">
+                        {{ mes }}
+                    </div> 
+                </div>
+            {% endfor %}
+
+            {% for message in app.session.flashBag.get('deletedNews') %}
+                <div class="row">
+                    <div class="col-md-12" id="flash">
+                        {{ message }}
+                    </div> 
+                </div>
+            {% endfor %}            
+
+            {% for messa in app.session.flashBag.get('notice') %}
+                <div class="row">
+                    <div class="col-md-12" id="flash">
+                        {{ messa }}
+                    </div> 
+                </div>
+            {% endfor %}
+                              
+            <div class="row" style="margin-top:25px;">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Add a Newsletter
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div style="text-align:center;">
+                                <div class="col-md-12">                                   
+                                <!-- Button trigger modal -->
+                                    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                                        Add a Newsletter
+                                    </button>                                    
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Newsletter of the : {{ dateCreated|date('d-m-Y')}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ tinymce_init() }}
+                                            {{form_start(form)}}
+                                            {{form_row(form.title)}}
+                                            {{form_row(form.author)}}
+                                            {{form_row(form.main1)}}
+                                            {{form_row(form.main2)}}
+                                            {{form_row(form.main3)}}
+                                            {{form_row(form.article)}}
+                                                <div style="text-align:center;margin-top:30px;">
+                                                    {{form_end(form)}}
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">X</button>                                 
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="{{ path('admin_newsletter_listAbonnes') }}"><button class="btn btn-success btn-lg">See list subscribers</button></a>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table width="100%"  class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <caption><strong>Newsletters list</strong></caption>
+                        <thead>
+                            <tr>                            
+                                <th>Title</th>
+                                <th>Date created</th>
+                                <th>Date sended</th>
+                                <th>Author</th>
+                                <th>Subject N° 1</th>
+                                <th>Subject N° 2</th>
+                                <th>Subject N° 3</th>                            
+                                <th>Articles Associated</th>
+                                <th>Actions</th>
+                                <th>Send</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if listNewsletters is not null %}
+                                {% for list in listNewsletters %}
+                                    <tr class="odd gradeX">                                
+                                        <td>{{ list.title|upper}}</td>
+                                        <td>{{ list.dateCreated|date('d-m-Y')}}</td>
+                                        <td>
+                                            {% if (list.dateSended is not null) %}
+                                                {{ list.dateSended|date('d-m-Y') }}
+                                            {% else %}
+                                                <p>Not sended yet</p>
+                                            {% endif %}
+                                        </td>
+                                        <td>{% if (list.author != null) %} {{ list.author|capitalize}} {% endif %}</td>
+                                        <td>{{ list.main1|raw}}</td>
+                                        <td>{% if (list.main2 != null) %} {{ list.main2|raw}} {% endif %}</td>
+                                        <td>
+                                            {% if (list.main3 != null) %} 
+                                                <a href="{{ path('admin_newsletter_edit',{id:list.id}) }}"><button class="btn btn-info">See more</button>
+                                                    </a> 
+                                            {% endif %}
+                                        </td>                                          
+                                        <td>
+                                            {% if (list.article != null) %}
+                                                {% for artic in list.article %}
+                                                    <a href="{{ path('admin_article_editArticle',{id:artic.id,idOrigin:6}) }}">{{ artic.title|capitalize}}</a><br>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('admin_newsletter_delete',{id:list.id}) }}"><button style="margin-bottom:10px;" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this newsletter ?')">Delete</button></a><br>
+                                            <a href="{{ path('admin_newsletter_edit',{id:list.id}) }}">
+                                                <button style="margin-bottom:10px;" class="btn btn-success">Edit</button></a>
+                                            <a href="{{ path('admin_newsletter_edit',{id:list.id}) }}">
+                                                <a href="{{ path('admin_newsletter_preview',{idNew:list.id}) }}"><button style="margin-bottom:10px;" class="btn btn-info">Preview</button></a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('admin_newsletter_send',{id:list.id, origin:1}) }}">
+                                                <button style="margin-bottom:10px;" class="btn btn-warning" onclick="return confirm('Are you sure you want to send this newsletter for the event arab subscribers ? This can take a few minits, please wait.')">Send for Arab event</button></a>
+                                            <a href="{{ path('admin_newsletter_send',{id:list.id, origin:2}) }}">
+                                                <button style="margin-bottom:10px;" class="btn btn-warning" onclick="return confirm('Are you sure you want to send this newsletter for the event english the subscribers ? This can take a few minits, please wait.')">Send for English event</button></a>
+                                            <a href="{{ path('admin_newsletter_send',{id:list.id, origin:0}) }}">
+                                                <button style="margin-bottom:10px;" class="btn btn-warning" onclick="return confirm('Are you sure you want to send this newsletter at all the subscribers ? This can take a few minits, please wait.')">Send at all</button></a>                                        
+                                        </td>    
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div> 
+
+               
+		
+    {% endblock %}

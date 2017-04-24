@@ -1,0 +1,322 @@
+admin_homepage:
+    path:     /admin/homepage
+    defaults: { _controller: AdminBundle:Home:homepage }
+
+admin_management_boursiers:
+    path:    /admin/management/boursiers
+    defaults: { _controller: AdminBundle:Home:management}
+    requirements:
+        idBoursier: "[0-9]+"
+
+admin_management_rights:
+    path:    /admin/management/rights 
+    defaults: { _controller: AdminBundle:Home:rights}
+
+# Gestion des messages
+admin_message_list:
+    path:   /admin/message/list
+    defaults: { _controller: AdminBundle:Message:list}
+
+admin_message_delete:
+    path: /admin/message/delete/{id}
+    defaults: { _controller: AdminBundle:Message:delete }
+    requirements:
+        id: "[0-9]+"
+
+admin_message_read:
+    path: /admin/message/read /{id}
+    defaults: { _controller: AdminBundle:Message:read}
+    requirements:
+        id: "[0-9]+"
+
+admin_message_answerTo:
+    path: /admin/message/answerTo /{id}
+    defaults: { _controller: AdminBundle:Message:answerTo}
+    requirements:
+        id: "[0-9]+"
+    
+# Gestion de la bibliothèque
+admin_book_list:
+    path: /admin/book/list 
+    defaults: { _controller: AdminBundle:Book:list}
+
+admin_book_create:
+    path:   /admin/book/create 
+    defaults: { _controller: AdminBundle:Book:create}
+
+admin_book_deleteBook:
+    path:   /admin/book/deleteBook/{id}
+    defaults: { _controller: AdminBundle:Book:deleteBook}
+    requirements:
+        id: "[0-9]+"
+
+admin_book_updateBook:
+    path:   /admin/book/updateBook/{id}
+    defaults: { _controller: AdminBundle:Book:updateBook}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion des articles
+admin_article_list:
+    path:  /admin/article/list 
+    defaults: { _controller: AdminBundle:Article:list}
+
+admin_article_create:
+    path:  /admin/article/create/{idOrigin}
+    defaults: { _controller: AdminBundle:Article:create}
+    requirements:
+        idOrigin: "[0-9]+"
+
+admin_article_editArticle:
+    path:  /admin/article/editArticle/{id}/{idOrigin}
+    defaults: { _controller: AdminBundle:Article:editArticle}
+    requirements:
+        id: "[0-9]+"
+        idOrigin: "[0-9]+"
+
+admin_article_delete:
+    path:  /admin/article/delete/{id} 
+    defaults: { _controller: AdminBundle:Article:delete}
+    requirements: 
+        id: "[0-9]+"
+
+# Gestion de la newsletter
+admin_newsletter_create:
+    path:  /admin/newsletter/createNews
+    defaults: { _controller: AdminBundle:Newsletter:createNews}
+
+admin_newsletter_send:
+    path:  /admin/newsletter/sendNews/{id}/{origin}
+    defaults: { _controller: AdminBundle:Newsletter:sendNews}
+    requirements:
+        id: "['0-9]+"
+        origin: "[0-2]+"
+
+admin_newsletter_edit:
+    path:  /admin/newsletter/editNews/{id}
+    defaults: { _controller: AdminBundle:Newsletter:editNews}
+    requirements:
+        id: "['0-9]+"
+
+admin_newsletter_delete:
+    path:  /admin/newsletter/deleteNews/{id}
+    defaults: { _controller: AdminBundle:Newsletter:deleteNews}
+    requirements: 
+        id: "[0-9]+"
+
+admin_newsletter_listAbonnes:
+    path:  /admin/newsletter/listAbonnes 
+    defaults: { _controller: AdminBundle:Newsletter:listAbonnes}
+
+admin_newsletter_preview:
+    path:   /admin/newsletter/preview/{idNew}
+    defaults: { _controller: AdminBundle:Newsletter:preview}
+    requirements:
+        idNew: "[0-9]+"
+        
+admin_abo_desactivate:
+    path:  /admin/abonnes/desactivate/{idAbonne}
+    defaults: { _controller: AdminBundle:Newsletter:desactivate}
+    requirements:
+        idAbonne: "[0-9]+"
+
+admin_abo_activate:
+    path:  /admin/abonnes/activate/{idAbonne}
+    defaults: { _controller: AdminBundle:Newsletter:activate}
+    requirements:
+        idAbonne: "[0-9]+"
+
+admin_abo_delete:
+    path:  /admin/abonnes/delete/{idAbonne}
+    defaults: { _controller: AdminBundle:Newsletter:delete}
+    requirements:
+        idAbonne: "[0-9]+"
+
+
+#Gestion des Counseillors
+admin_counseillor_list:
+    path:  /admin/counseillor/list/{origin}
+    defaults: { _controller: AdminBundle:Counseillor:list}
+    requirements:
+        origin: "[1-2]+"
+
+admin_counseillor_create:
+    path:  /admin/counseillor/create 
+    defaults: { _controller: AdminBundle:Counseillor:create}
+
+admin_counseillor_edit: 
+    path:  /admin/counseillor/edit/{id}
+    defaults: { _controller: AdminBundle:Counseillor:edit}   
+    requirements: 
+        id: "[0-9]+"
+
+admin_counseillor_delete:
+    path:  /admin/counseillor/delete/{id}
+    defaults: { _controller: AdminBundle:Counseillor:delete}
+
+admin_counseillor_desactivate:
+    path:  /admin/counseillor/desactivate/{id}
+    defaults: { _controller: AdminBundle:Counseillor:desactivate}
+    requirements:
+        id: "[0-9]+"
+
+admin_counseillor_activate:
+    path:  /admin/counseillor/activate/{id}
+    defaults: { _controller: AdminBundle:Counseillor:activate}
+    requirements:
+        id: "[0-9]+"
+
+#Gestion des EventBoursiers
+admin_boursier_event_createEvent:
+    path:  /admin/event/createEvent 
+    defaults: { _controller: AdminBundle:Boursier:createEvent}
+
+admin_boursier_event_listEvent:
+    path:  /admin/event/listEvent 
+    defaults: { _controller: AdminBundle:Boursier:listEvent}
+
+admin_boursier_event_editEvent:
+    path:  /admin/event/editEvent/{id}
+    defaults: { _controller: AdminBundle:Boursier:editEvent}
+    requirements:
+        id: "[0-9]+"
+
+admin_boursier_event_deleteEvent:
+    path:  /admin/event/deleteEvent/{id}
+    defaults: { _controller: AdminBundle:Boursier:deleteEvent}
+    requirements:
+        id: "[0-9]+"
+
+admin_boursier_event_desactivate_boursier:
+    path:  /admin/event/desactivate/boursier/{id}
+    defaults: { _controller: AdminBundle:Boursier:desactivate}
+    requirements: 
+        id: "[0-9]+"
+
+admin_boursier_event_activate_boursier:
+    path:  /admin/event/activate/boursier/{id}
+    defaults: { _controller: AdminBundle:Boursier:activate}
+    requirements: 
+        id: "[0-9]+"
+
+admin_management_boursier_update:
+    path:   /admin/management/boursier/update/{idBoursier}
+    defaults: { _controller: AdminBundle:Boursier:update}
+    requirements:
+        idBoursier: "[0-9]+"
+
+#Gestion des Boursiers:
+admin_boursier_deleteBoursier:
+    path:   /admin/boursier/deleteBoursier/{id}
+    defaults: { _controller: AdminBundle:Home:deleteBoursier}
+    requirements:
+        id: "[0-9]+"
+
+#Gestion des Partenaires
+admin_partner_list:
+    path:  /admin/partner/listPartner 
+    defaults:  { _controller: AdminBundle:Partner:listPartner}
+
+admin_partner_create:
+    path:  /admin/partner/createPartner 
+    defaults:  { _controller: AdminBundle:Partner:createPartner}
+
+admin_partner_edit:
+    path:  /admin/partner/editPartner/{id}
+    defaults:  { _controller: AdminBundle:Partner:editPartner}
+    requirements:
+        id: "[0-9]+"
+
+admin_partner_delete:
+    path:  /admin/partner/deletePartner/{id}
+    defaults:  { _controller: AdminBundle:Partner:deletePartner}
+    requirements:
+        id: "[0-9]+"
+
+admin_partner_active:
+    path:  /admin/partner/activePartner/{id}
+    defaults:  { _controller: AdminBundle:Partner:activePartner}
+    requirements:
+        id: "[0-9]+"
+
+admin_partner_desactive:
+    path:  /admin/partner/desactivePartner/{id}
+    defaults:  { _controller: AdminBundle:Partner:desactivePartner}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion des fichiers upload
+admin_document_editDoc:
+    path:  /admin/document/editDoc/{id} 
+    defaults: { _controller: AdminBundle:Document:editDoc}
+    requirements:
+        id: "[0-9]+"
+
+admin_document_suppDoc:
+    path:  /admin/document/suppDoc/{id} 
+    defaults: { _controller: AdminBundle:Document:suppDoc}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion de l'école:
+admin_school_document:
+    path:   /admin/school/document/{idStudent}
+    defaults: { _controller: AdminBundle:School:document}
+    requirements:
+        idStudent: "[0-9]+"
+
+admin_school_listAndCreate:
+    path:   /admin/school/listAndCreate/{origin}/{id}
+    defaults: { _controller: AdminBundle:School:listAndCreate}
+    requirements:
+        origin: "[1-2]+"
+        id: "[0-9]+"
+
+admin_school_delete:
+    path:   /admin/school/delete/{idStudent}
+    defaults: { _controller: AdminBundle:School:delete}
+    requirements:
+        idStudent: "[0-9]+"
+
+admin_school_archiveStudent:
+    path:   /admin/school/archiveStudent/{idStudent}
+    defaults: { _controller: AdminBundle:School:archiveStudent}
+    requirements: 
+        idStudent: "[0-9]+"
+
+admin_school_archiveStudent_listStudent:
+    path:   /admin/school/archiveStudent/listArchivedStudent
+    defaults: { _controller: AdminBundle:School:listArchivedStudent}
+
+# Gestion des années scolaires
+admin_amount_create:
+    path:   /amount/school/create/{origin}/{idAmount}
+    defaults: { _controller: AdminBundle:Amount:create}
+    requirements:
+        origin: "[1-2]+"
+        idAmount: "[0-9]+"
+
+admin_amount_old_list:
+    path:     /amount/school/old/list
+    defaults: { _controller: AdminBundle:Amount:list}
+
+admin_amount_delete:
+    path:   /amount/school/delete/{idAmount}
+    defaults: { _controller: AdminBundle:Amount:delete}
+    requirements:
+        idAmount: "[0-9]+"
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+

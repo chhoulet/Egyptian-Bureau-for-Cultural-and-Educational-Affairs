@@ -1,0 +1,240 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+	{% block title %}<title>Scholars management</title>{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+	            <div class="row" style="background-color:#B4DEC9;">
+	                <div class="col-lg-12">
+	                    <h1 class="page-header">Scholars management</h1>
+	                </div>
+	                <!-- /.col-lg-12 -->
+	            </div><br><br>
+
+
+				{% for mess in app.session.flashBag.get('addDoc') %}
+					<div class="row">
+						<div class="col-md-12" id="flash">
+							{{ mess }}
+						</div> 
+					</div>
+				{% endfor %}
+
+				
+                {% for message in app.session.flashBag.get('deletedBoursier') %}
+                	<div class="row">
+						<div class="col-md-12" id="flash">
+                    		{{ message }}
+                    	</div> 
+                    </div>
+                {% endfor %}
+
+                {% for messageB in app.session.flashBag.get('editBoursier') %}
+                	<div class="row">
+						<div class="col-md-12" id="flash">
+                    		{{ messageB }}
+                    	</div> 
+                    </div>
+                {% endfor %}
+	            
+
+				{% for mes in app.session.flashBag.get('errDoc') %}
+					<div class="row">
+						<div class="col-md-12" id="flash">
+							{{ mes }}
+						</div> 
+					</div>
+				{% endfor %}
+
+				{% for desact in app.session.flashBag.get('desactivate') %}
+					<div class="row">
+						<div class="col-md-12" id="flash">
+							{{ desact }}
+						</div> 
+					</div>
+				{% endfor %}
+
+				{% for desyet in app.session.flashBag.get('desactivateYet') %}
+					<div class="row">
+						<div class="col-md-12" id="flash">
+							{{ desyet }}
+						</div> 
+					</div>
+				{% endfor %}
+
+				{% for desyetdoc in app.session.flashBag.get('alldoc') %}
+					<div class="row">
+						<div class="col-md-12" id="flash">
+							{{ desyetdoc }}
+						</div> 
+					</div>
+				{% endfor %}	
+
+				<div class="row">
+			        <div class="col-lg-12">
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            <strong>Registration of a scholar</strong>
+	                        </div>
+	                        <!-- /.panel-heading -->
+	                        <div class="panel-body">
+	                        	<div class="col-md-12" style="text-align:center;">
+	                        		<a href="{{ path('fos_user_registration_register') }}"><button class="btn btn-success">Registration</button></a>
+	                        	</div> 
+	                    	</div>
+	                	</div> 
+	            	</div>
+	            </div>  <br><br>
+
+	            <div class="row">
+			        <div class="col-lg-12">
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            <strong>Send a document to a scholar</strong>
+	                        </div>
+	                        <!-- /.panel-heading -->
+	                        <div class="panel-body">
+	                        	<div class="col-md-12">
+                        			
+                        				{{ form_start(formDoc)}}
+                        			
+                        			<div class="col-md-3">
+                        				{{ form_row(formDoc.username)}}
+                        			</div>
+                        			<div class="col-md-3">
+                        				{{ form_row(formDoc.name)}}
+                        			</div>
+                        			<div class="col-md-3">
+                        				{{ form_row(formDoc.description)}}
+                        			</div>	                        		
+	                        		<div class="col-md-3" style="text-align:center;">
+	                        			<span style="color: red;font-weight: bold;">PDF file only !</span>
+	                        			{{ form_widget(formDoc.file)}}	                        			
+	                        		</div>
+	                        		<div class="col-md-12" style="margin-top:18px;text-align:center;">        			                       	
+	                        			{{ form_end(formDoc)}}
+	                        		</div>
+	                        	</div> 
+	                    	</div>
+
+	                	</div> 
+	            	</div>
+	            </div>	<br><br>
+
+	            <div class="row">
+			        <div class="col-lg-12">
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            <strong>Send a document at all scholars</strong>
+	                        </div>
+	                        <!-- /.panel-heading -->
+	                        <div class="panel-body">
+	                        	<div class="col-md-12">
+                        			
+                        				{{ form_start(form)}}
+                        			
+                        			
+                        			<div class="col-md-4">
+                        				{{ form_row(form.name)}}
+                        			</div>
+                        			<div class="col-md-4">
+                        				{{ form_row(form.description)}}
+                        			</div>	                        		
+	                        		<div class="col-md-4" style="text-align:center;">
+	                        			<span style="color: red;font-weight: bold;">PDF file only !</span>
+	                        			{{ form_widget(form.file)}}	                        			
+	                        		</div>
+	                        		<div class="col-md-12" style="margin-top:18px;text-align:center;">        			                       	
+	                        			{{ form_end(form)}}
+	                        		</div>
+	                        	</div> 
+	                    	</div>
+
+	                	</div> 
+	            	</div>
+	            </div>	<br><br>		
+
+				<div class="panel-body">
+					<div class="table-responsive">
+		                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+		                	<caption><strong>Scholars list - Profil completed</strong></caption>
+		                    <thead>
+		                        <tr>
+		                            <th>Mail</th>
+		                            <th>Username</th>
+		                            <th>Name & Firstname</th>
+		                            <th>Complete adress</th>	                           
+		                            <th>Arrival Date </th>
+		                            <th>Birthday</th>                            
+		                            <th>Field of study</th>                            
+		                            <th>Subject of study</th>                            
+		                            <th>Egyptian - University</th>                            
+		                            <th>English University</th>
+		                            <th>Phone Numbers</th>                            
+		                            <th>Comment</th>                            
+		                            <th>State</th>                            
+		                            <th>Actions</th>                            
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+			                    {% if listBoursiers is not null %}
+			                    	{% for user in listBoursiers %}
+			                            <tr class="odd gradeX">
+			                                <td>{{ user.email}}</td>                                                    
+			                                <td>{{ user.username}}</td>                                                    
+			                            	{% if user.boursier is not empty %}                              
+				                                <td>{{ user.boursier.getFullName() }}</td>	                                                         
+				                                <td>{{ user.boursier.getFullAdress() }}</td>                                                    
+				                                <td>{{ user.boursier.arrivalDate|date('d-m-Y') }}</td>                                                    
+				                                <td>{{ user.boursier.birthDate|date('d-m-Y') }}</td>                                                    
+				                                <td>{{ user.boursier.domain|capitalize }}</td>                                                    
+				                                <td>{{ user.boursier.subject|capitalize }}</td>                                                    
+				                                <td>{{ user.boursier.universityEgypt|capitalize }}</td>                                                    
+				                                <td>{{ user.boursier.universityFrench|capitalize }}</td>                                                    
+				                                <td>
+				                                	Land Line : {{ user.boursier.telfix }}<br>  
+				                                	Mobile : {{ user.boursier.telpor }}<br>
+				                                	Egyptian : {{ user.boursier.telegy }}
+				                                </td>                   
+				                                <td>{{ user.boursier.comment }}</td>                                                    
+				                                <td>
+				                                	{% if user.boursier.activated == 1 %}
+				                                		<p style="background-color:green">Active</p>
+				                                	{% else %}
+				                                		<p style="background-color:yellow">Unactive</p>
+				                                	{% endif %}
+				                                </td>    
+				                                <td>
+				                                {% if  user.boursier.activated == 1 %}
+				                                	<a href="{{ path('admin_boursier_event_desactivate_boursier',{id:user.boursier.id}) }}" onclick="return(confirm('Are you sure to update this scholar ?'))"><button class="btn btn-warning" style="margin-top:15px;">Desactivate</button></a>
+				                                {% else %}
+				                                	<a href="{{ path('admin_boursier_event_activate_boursier',{id:user.boursier.id}) }}" onclick="return(confirm('Are you sure to activate this scholar ?'))"><button class="btn btn-warning" style="margin-top:15px;">Activate</button></a>
+				                                {% endif %}
+				                                	<a href="{{ path('admin_management_boursier_update',{idBoursier:user.boursier.id}) }}" onclick="return(confirm('Are you sure to update this scholar ?'))"><button class="btn btn-info" style="margin-top:15px;">Update</button></a>
+				                                	<a href="{{ path('admin_boursier_deleteBoursier',{id:user.boursier.id}) }}" onclick="return(confirm('Are you sure to delete this scholar ?'))"><button class="btn btn-danger" style="margin-top:15px;">Delete</button></a>
+				                                </td>
+				                            {% else %}
+				                            	<td></td>                                                                    
+				                                <td></td>
+				                                <td></td>                                                                    
+				                                <td></td>
+				                                <td></td>                                                                    
+				                                <td></td>
+				                                <td></td>                                                                    
+				                                <td></td>
+				                                <td></td>                                                                    
+				                                <td></td>				                                
+				                                <td></td>				                                
+				                                <td></td>				                                
+				                            {% endif %}		                                                            
+			                            </tr>
+			                        {% endfor %}
+			                    {% endif %}                              
+		                    </tbody>
+		                </table>
+		            </div>
+	        	</div>					            	                         	       
+	    </div>	   
+	   
+	{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+    {% block title %}<title>List of Subscribers</title>{% endblock %}
+
+	{% block body %}
+			
+        <div id="page-wrapper">
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    <h1 class="page-header">List of subscribers</h1>
+                </div>
+            </div>
+
+            {% for message in app.session.flashBag.get('deletedMail') %}
+                <div id="flash">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for messag in app.session.flashBag.get('acti') %}
+                <div id="flash">
+                    {{ messag }}
+                </div>
+            {% endfor %}
+
+            {% for messa in app.session.flashBag.get('desac') %}
+                <div id="flash">
+                    {{ messa }}
+                </div>
+            {% endfor %}
+
+                                      
+            <div class="row" style="margin-top:35px;">
+                <div class="col-lg-12">                     
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            List of Subscribers
+                        </div>                              
+                       
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Mail</th>
+                                            <th>Name</th>
+                                            <th>Firstname</th>
+                                            <th>Job</th>
+                                            <th>Event</th>                                        
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if listAbo is not null %}
+                                        	{% for abo in listAbo %}
+        	                                    <tr class="odd gradeX">
+                                                    <td>{{ abo.mail}}</td>
+        	                                        <td>{{ abo.name|upper}}</td>
+                                                    <td>{{ abo.firstName|capitalize}}</td>
+        	                                        <td>{{ abo.job|capitalize}}</td>
+                                                    <td>                                            
+                                                        {% if (abo.event == 1) %}
+                                                            <p ><strong>Arab event</strong></p>
+                                                        {% elseif (abo.event == 2) %}
+                                                            <p><strong>English event</strong></p>
+                                                        {% elseif (abo.event == 3) %}
+                                                            <p><strong>All</strong></p>
+                                                        {% endif %}
+                                                    </td>                                           
+                                                    <td>
+                                                    {% if abo.active == 1 %}
+                                                        <a href="{{ path('admin_abo_desactivate',{idAbonne:abo.id}) }}" title="Desactivate this subscriber"><button class="btn btn-info" style="margin-bottom:10px;" title="Desactivate this abonne" onclick="return(confirm('Are you sure you want to desactivate this subscriber ?'))">Desactivate</button></a> 
+                                                    {% else %}               
+                                                        <a href="{{ path('admin_abo_activate',{idAbonne:abo.id}) }}" title="Activate this subscriber" ><button class="btn btn-success" style="margin-bottom:10px;" title="Activate this subscriber" onclick="return(confirm('Are you sure you want to activate this subscriber ?'))">Activate</button></a>
+                                                    {% endif %}
+                                                        <a href="{{ path('admin_abo_delete',{idAbonne:abo.id}) }}" title="Delete this subscriber"><button class="btn btn-danger" style="margin-bottom:10px;" title="Delete this subscriber" onclick="return(confirm('Are you sure you want to delete this subscriber ?'))">Delete</button></a>                   
+                                                    </td>             
+                                                </tr>
+        	                                {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">
+                                                    <p>No subscriber registered yet</p>
+                                                </td>
+                                            </tr>
+                                        {% endif %}                              
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                   
+        </div>
+
+        <hr/>
+
+    {% endblock %}

@@ -1,0 +1,23 @@
+{{ newsletter.title|upper }}
+
+{% if newsletter.author is not null %}
+	<p>{{ newsletter.title|capitalize }}</p><br>
+{% endif %}
+
+{{ newsletter.main1|raw }}
+
+{% if newsletter.main2 is not null %}
+	<p>{{ newsletter.main2|raw }}</p><br>
+{% endif %}
+
+{% if newsletter.main3 is not null %}
+	<p>{{ newsletter.main3|raw }}</p><br>
+{% endif %}
+
+{% if newsletter.article is not empty %}
+	{% for article in newsletter.article %}
+		{{ article.title|upper }}<br>
+		{{ article.subject }}<br>
+		{{ article.main|raw }}
+	{% endfor %}
+{% endif %}

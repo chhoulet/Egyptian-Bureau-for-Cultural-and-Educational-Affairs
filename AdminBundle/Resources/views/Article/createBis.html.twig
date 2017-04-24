@@ -1,0 +1,70 @@
+{% extends 'AdminBundle:Default:baseAdmin.html.twig' %}
+
+    {% block title %}<title>
+    {% if (affich == 1) %}     
+        {% if (origin == 3 ) %}
+            Create an activity for the Cultural  Bureau                                                  
+        {% elseif (origin == 6 ) %}
+            Create an article in homepage        
+        {% endif %}
+    {% else %}
+        {% if (origin == 3 ) %}
+            Edit an activity of the Cultural  Bureau                                                    
+        {% elseif (origin == 6 ) %}
+            Edit an article                   
+        {% endif %}
+    {% endif %} 
+    </title>{% endblock %}
+
+	{% block body %}
+		
+		<div id="page-wrapper">
+            <div class="row" style="background-color:#B4DEC9;">
+                <div class="col-lg-12">
+                    <h2 class="page-header">
+                        {% if (affich == 1) %}     
+                            {% if (origin == 3 ) %}
+                                Create an activity for the Cultural  Bureau                                                  
+                            {% elseif (origin == 6 ) %}
+                                Create an article in homepage        
+                            {% endif %}
+                        {% else %}
+                            {% if (origin == 3 ) %}
+                                Edit an activity of the Cultural  Bureau                                                    
+                            {% elseif (origin == 6 ) %}
+                                Edit an article        
+                            {% endif %}
+                        {% endif %} 
+                    </h2>
+                </div>
+            </div>
+                              
+            <div class="container" style="margin-top:45px;">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                            <div class="form-group">
+                                {{ tinymce_init() }}                                     
+                            	{{form_start(form)}}
+                                    {{form_row(form.title)}}
+                                	{{form_row(form.titleArab)}}
+                                    {{form_row(form.author)}}
+                                    {{form_row(form.subject)}}
+                                    {{form_row(form.subjectArab)}}
+                                    {{form_row(form.main)}}
+                                	{{form_row(form.mainArab)}}
+                                    {{form_row(form.selected)}}
+                                    {{form_row(form.photo)}}
+                                	{{form_row(form.filename)}}
+                                <div style="text-align:center;margin-top:45px;">
+                        	       {{form_end(form)}}
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>                
+            </div>
+            
+        </div>        
+	
+	{% endblock %}
