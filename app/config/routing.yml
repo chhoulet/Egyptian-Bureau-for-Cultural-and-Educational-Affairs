@@ -1,0 +1,15 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+article:
+    resource: "@ArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user_bundle:
+   resource: "@UserBundle/Resources/config/routing.yml"
+
